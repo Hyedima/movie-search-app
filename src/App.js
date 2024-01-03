@@ -2,6 +2,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { MovieCard } from './components/MovieCard/MovieCard';
+//require('dotenv').config()
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -11,11 +12,11 @@ function App() {
 
   const fetchMovies = async (searchQuery) => {
     try {
-      const { data } = await axios.get(`https://www.omdbapi.com/?s=${searchQuery}&apikey=9a5f272`); // implement read from .env
+      const { data } = await axios.get(`https://www.omdbapi.com/?s=${searchQuery}&apikey=9a5f272`); // The API Key in .env ${ process.env.apiKey }
       if (data && data.Search) {
         setMovies(data.Search);
-        if (searchQuery) {
-          updateLatestQueries(searchQuery);
+        if (searchQuery) { 
+          updateLatestQueries(searchQuery); 
         }
       } else {
         setMovies([]);
